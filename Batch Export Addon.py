@@ -1,10 +1,11 @@
 #Tell blender the metadata of the add-on
 bl_info = {
     "name": "Animation Batch Exporter",
-    "description": "Exports a batch file that renders the scene as an animation using the windows command line to the same directory as the currently opened blend file", 
+    "description": "Exports a batch file that renders the scene as an animation using the windows command line", 
     "category": "Import-Export",
     "author": "Nate Townsend", 
     "version": (0,1),
+    "blender": (2, 80, 0),
 }
 import bpy
 import os
@@ -28,8 +29,7 @@ class exportbatchfile(bpy.types.Operator):
             fullblendpath = "%s\%s" % (blendfilefolder, blendfilename)
             print(fullblendpath)
         else:
-            print("Blend file has not yet been saved")
-            self.report({'ERROR'}, 'Blend file has not yet been saved - you need to save you project before you can run this script!') 
+            print("Blend file has not yet been saved") 
         #Write the batch file that will start the render
         batch = open(os.path.join(blendfilefolder, 'render.bat'), 'a+')
         batch.write("""cd %s
